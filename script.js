@@ -44,18 +44,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     scrollToSection(event, tab) {
-      event.preventDefault();
       const targetId = tab.getAttribute("href");
-      const targetElement = document.querySelector(targetId);
 
-      if (targetElement) {
-        const offsetTop =
-          targetElement.offsetTop - document.querySelector(".nav-container").offsetHeight;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: "smooth",
-        });
+      if (targetId.startsWith("#")) {
+        event.preventDefault();
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          const offsetTop =
+            targetElement.offsetTop -
+            document.querySelector(".nav-container").offsetHeight;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: "smooth",
+          });
+        }
       }
+      // For external links, the default browser action will occur.
     }
 
     handleScroll(navContainer) {
